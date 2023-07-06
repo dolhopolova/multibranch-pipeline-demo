@@ -5,11 +5,13 @@
 
 trigger:
 - master
-
-pool:
   vmImage: ubuntu-latest
 
 steps:
+- task: octane-start-task@2
+  inputs:
+    OctaneServiceConnection: 'tdazureconnection'
+    WorkspaceList: '1003':
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
@@ -17,3 +19,7 @@ steps:
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
+- task: octane-end-task@2
+  inputs:
+    OctaneServiceConnection: 'tdazureconnection'
+    WorkspaceList: '1003'
