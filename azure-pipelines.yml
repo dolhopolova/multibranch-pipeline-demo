@@ -5,13 +5,18 @@
 
 trigger:
 - master
-  vmImage: ubuntu-latest
+
+
+pool:
+  name: default
+
 
 steps:
 - task: octane-start-task@2
   inputs:
     OctaneServiceConnection: 'tdazureconnection'
     WorkspaceList: '1003':
+    condition: succeededOrFailed()
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
